@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.rdoInactive = New System.Windows.Forms.RadioButton()
@@ -28,7 +28,6 @@ Partial Class frmMain
         Me.rdoAll = New System.Windows.Forms.RadioButton()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -57,13 +56,29 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnTestConnection = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.statusDeveloped = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.lblFullName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseProgramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MasterfiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TypeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BreedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OwnerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AuditLogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgPets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -73,7 +88,7 @@ Partial Class frmMain
         Me.GroupBox2.Controls.Add(Me.rdoAll)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(241, 14)
+        Me.GroupBox2.Location = New System.Drawing.Point(241, 27)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(645, 44)
         Me.GroupBox2.TabIndex = 1
@@ -128,18 +143,9 @@ Partial Class frmMain
         Me.txtSearch.Size = New System.Drawing.Size(100, 20)
         Me.txtSearch.TabIndex = 1
         '
-        'btnClose
-        '
-        Me.btnClose.Location = New System.Drawing.Point(811, 374)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 9
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
-        '
         'btnPrint
         '
-        Me.btnPrint.Location = New System.Drawing.Point(730, 374)
+        Me.btnPrint.Location = New System.Drawing.Point(811, 387)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(75, 23)
         Me.btnPrint.TabIndex = 8
@@ -148,7 +154,7 @@ Partial Class frmMain
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(255, 374)
+        Me.btnDelete.Location = New System.Drawing.Point(255, 387)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 6
@@ -157,7 +163,7 @@ Partial Class frmMain
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(174, 374)
+        Me.btnUpdate.Location = New System.Drawing.Point(174, 387)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 5
@@ -166,7 +172,7 @@ Partial Class frmMain
         '
         'btnNew
         '
-        Me.btnNew.Location = New System.Drawing.Point(12, 374)
+        Me.btnNew.Location = New System.Drawing.Point(12, 387)
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(75, 23)
         Me.btnNew.TabIndex = 3
@@ -175,7 +181,7 @@ Partial Class frmMain
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(93, 374)
+        Me.btnSave.Location = New System.Drawing.Point(93, 387)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 4
@@ -184,8 +190,9 @@ Partial Class frmMain
         '
         'dgPets
         '
+        Me.dgPets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgPets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgPets.Location = New System.Drawing.Point(241, 64)
+        Me.dgPets.Location = New System.Drawing.Point(241, 77)
         Me.dgPets.Name = "dgPets"
         Me.dgPets.Size = New System.Drawing.Size(645, 294)
         Me.dgPets.TabIndex = 2
@@ -213,7 +220,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.txtID)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 25)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(214, 346)
         Me.GroupBox1.TabIndex = 0
@@ -402,39 +409,136 @@ Partial Class frmMain
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "ID"
         '
-        'btnTestConnection
-        '
-        Me.btnTestConnection.Location = New System.Drawing.Point(629, 374)
-        Me.btnTestConnection.Name = "btnTestConnection"
-        Me.btnTestConnection.Size = New System.Drawing.Size(95, 23)
-        Me.btnTestConnection.TabIndex = 7
-        Me.btnTestConnection.Text = "Test Connection"
-        Me.btnTestConnection.UseVisualStyleBackColor = True
-        '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 404)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblUsername, Me.statusDeveloped})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 421)
         Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusStrip1.Size = New System.Drawing.Size(898, 22)
         Me.StatusStrip1.TabIndex = 10
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatusLabel1
+        'lblUsername
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(241, 17)
-        Me.ToolStripStatusLabel1.Text = "Developed by: James Carlo Luchavez © 2020"
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(441, 17)
+        Me.lblUsername.Spring = True
+        Me.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'statusDeveloped
+        '
+        Me.statusDeveloped.Name = "statusDeveloped"
+        Me.statusDeveloped.Size = New System.Drawing.Size(441, 17)
+        Me.statusDeveloped.Spring = True
+        Me.statusDeveloped.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblFullName, Me.MasterfiToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.MenuStrip1.Size = New System.Drawing.Size(898, 24)
+        Me.MenuStrip1.TabIndex = 11
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'lblFullName
+        '
+        Me.lblFullName.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.lblFullName.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogoutToolStripMenuItem, Me.CloseProgramToolStripMenuItem})
+        Me.lblFullName.Margin = New System.Windows.Forms.Padding(0, 0, 10, 0)
+        Me.lblFullName.Name = "lblFullName"
+        Me.lblFullName.Size = New System.Drawing.Size(12, 20)
+        '
+        'LogoutToolStripMenuItem
+        '
+        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
+        Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.LogoutToolStripMenuItem.Text = "&Logout"
+        '
+        'CloseProgramToolStripMenuItem
+        '
+        Me.CloseProgramToolStripMenuItem.Name = "CloseProgramToolStripMenuItem"
+        Me.CloseProgramToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.CloseProgramToolStripMenuItem.Text = "&Quit"
+        '
+        'MasterfiToolStripMenuItem
+        '
+        Me.MasterfiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TypeToolStripMenuItem, Me.BreedToolStripMenuItem, Me.OwnerToolStripMenuItem, Me.AuditLogsToolStripMenuItem})
+        Me.MasterfiToolStripMenuItem.Name = "MasterfiToolStripMenuItem"
+        Me.MasterfiToolStripMenuItem.Size = New System.Drawing.Size(76, 20)
+        Me.MasterfiToolStripMenuItem.Text = "&Master File"
+        '
+        'TypeToolStripMenuItem
+        '
+        Me.TypeToolStripMenuItem.Name = "TypeToolStripMenuItem"
+        Me.TypeToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.TypeToolStripMenuItem.Text = "&Type"
+        '
+        'BreedToolStripMenuItem
+        '
+        Me.BreedToolStripMenuItem.Name = "BreedToolStripMenuItem"
+        Me.BreedToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.BreedToolStripMenuItem.Text = "&Breed"
+        '
+        'OwnerToolStripMenuItem
+        '
+        Me.OwnerToolStripMenuItem.Name = "OwnerToolStripMenuItem"
+        Me.OwnerToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.OwnerToolStripMenuItem.Text = "&Owner"
+        '
+        'AuditLogsToolStripMenuItem
+        '
+        Me.AuditLogsToolStripMenuItem.Name = "AuditLogsToolStripMenuItem"
+        Me.AuditLogsToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.AuditLogsToolStripMenuItem.Text = "&Audit Logs"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UsersToolStripMenuItem, Me.TestConnectionToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.SettingsToolStripMenuItem.Text = "&Settings"
+        '
+        'UsersToolStripMenuItem
+        '
+        Me.UsersToolStripMenuItem.Name = "UsersToolStripMenuItem"
+        Me.UsersToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.UsersToolStripMenuItem.Text = "&User Management"
+        '
+        'TestConnectionToolStripMenuItem
+        '
+        Me.TestConnectionToolStripMenuItem.Name = "TestConnectionToolStripMenuItem"
+        Me.TestConnectionToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.TestConnectionToolStripMenuItem.Text = "&Test Connection"
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator5, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "&Help"
+        '
+        'toolStripSeparator5
+        '
+        Me.toolStripSeparator5.Name = "toolStripSeparator5"
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(245, 6)
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
+        Me.AboutToolStripMenuItem.Text = "&About Pet Management Solution"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(898, 426)
+        Me.ClientSize = New System.Drawing.Size(898, 443)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.btnTestConnection)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
@@ -442,11 +546,11 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.dgPets)
         Me.Controls.Add(Me.GroupBox1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pet Management Solution"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.dgPets, System.ComponentModel.ISupportInitialize).EndInit()
@@ -454,6 +558,8 @@ Partial Class frmMain
         Me.GroupBox1.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -465,7 +571,6 @@ Partial Class frmMain
     Friend WithEvents rdoAll As RadioButton
     Friend WithEvents Label10 As Label
     Friend WithEvents txtSearch As TextBox
-    Friend WithEvents btnClose As Button
     Friend WithEvents btnPrint As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
@@ -494,7 +599,22 @@ Partial Class frmMain
     Friend WithEvents txtID As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents cboStatus As ComboBox
-    Friend WithEvents btnTestConnection As Button
     Friend WithEvents StatusStrip1 As StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents statusDeveloped As ToolStripStatusLabel
+    Friend WithEvents lblUsername As ToolStripStatusLabel
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MasterfiToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TypeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BreedToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OwnerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UsersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblFullName As ToolStripMenuItem
+    Friend WithEvents TestConnectionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseProgramToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents toolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AuditLogsToolStripMenuItem As ToolStripMenuItem
 End Class

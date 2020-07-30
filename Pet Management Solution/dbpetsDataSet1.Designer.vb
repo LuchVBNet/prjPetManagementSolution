@@ -25,7 +25,9 @@ Option Explicit On
 Partial Public Class dbpetsDataSet
     Inherits Global.System.Data.DataSet
     
-    Private tableviewpetsactive As viewpetsactiveDataTable
+    Private tableviewusers As viewusersDataTable
+    
+    Private tablepets As petsDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -56,8 +58,11 @@ Partial Public Class dbpetsDataSet
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
-            If (Not (ds.Tables("viewpetsactive")) Is Nothing) Then
-                MyBase.Tables.Add(New viewpetsactiveDataTable(ds.Tables("viewpetsactive")))
+            If (Not (ds.Tables("viewusers")) Is Nothing) Then
+                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewusers")))
+            End If
+            If (Not (ds.Tables("pets")) Is Nothing) Then
+                MyBase.Tables.Add(New petsDataTable(ds.Tables("pets")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -80,9 +85,19 @@ Partial Public Class dbpetsDataSet
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property viewpetsactive() As viewpetsactiveDataTable
+    Public ReadOnly Property viewusers() As viewusersDataTable
         Get
-            Return Me.tableviewpetsactive
+            Return Me.tableviewusers
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property pets() As petsDataTable
+        Get
+            Return Me.tablepets
         End Get
     End Property
     
@@ -153,8 +168,11 @@ Partial Public Class dbpetsDataSet
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
-            If (Not (ds.Tables("viewpetsactive")) Is Nothing) Then
-                MyBase.Tables.Add(New viewpetsactiveDataTable(ds.Tables("viewpetsactive")))
+            If (Not (ds.Tables("viewusers")) Is Nothing) Then
+                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewusers")))
+            End If
+            If (Not (ds.Tables("pets")) Is Nothing) Then
+                MyBase.Tables.Add(New petsDataTable(ds.Tables("pets")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -188,10 +206,16 @@ Partial Public Class dbpetsDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableviewpetsactive = CType(MyBase.Tables("viewpetsactive"),viewpetsactiveDataTable)
+        Me.tableviewusers = CType(MyBase.Tables("viewusers"),viewusersDataTable)
         If (initTable = true) Then
-            If (Not (Me.tableviewpetsactive) Is Nothing) Then
-                Me.tableviewpetsactive.InitVars
+            If (Not (Me.tableviewusers) Is Nothing) Then
+                Me.tableviewusers.InitVars
+            End If
+        End If
+        Me.tablepets = CType(MyBase.Tables("pets"),petsDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tablepets) Is Nothing) Then
+                Me.tablepets.InitVars
             End If
         End If
     End Sub
@@ -204,13 +228,21 @@ Partial Public Class dbpetsDataSet
         Me.Namespace = "http://tempuri.org/dbpetsDataSet1.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
-        Me.tableviewpetsactive = New viewpetsactiveDataTable()
-        MyBase.Tables.Add(Me.tableviewpetsactive)
+        Me.tableviewusers = New viewusersDataTable()
+        MyBase.Tables.Add(Me.tableviewusers)
+        Me.tablepets = New petsDataTable()
+        MyBase.Tables.Add(Me.tablepets)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Private Function ShouldSerializeviewpetsactive() As Boolean
+    Private Function ShouldSerializeviewusers() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Private Function ShouldSerializepets() As Boolean
         Return false
     End Function
     
@@ -273,15 +305,371 @@ Partial Public Class dbpetsDataSet
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Delegate Sub viewpetsactiveRowChangeEventHandler(ByVal sender As Object, ByVal e As viewpetsactiveRowChangeEvent)
+    Public Delegate Sub viewusersRowChangeEventHandler(ByVal sender As Object, ByVal e As viewusersRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Delegate Sub petsRowChangeEventHandler(ByVal sender As Object, ByVal e As petsRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
-    Partial Public Class viewpetsactiveDataTable
-        Inherits Global.System.Data.TypedTableBase(Of viewpetsactiveRow)
+    Partial Public Class viewusersDataTable
+        Inherits Global.System.Data.TypedTableBase(Of viewusersRow)
+        
+        Private columnID As Global.System.Data.DataColumn
+        
+        Private columnFirst_Name As Global.System.Data.DataColumn
+        
+        Private columnLast_Name As Global.System.Data.DataColumn
+        
+        Private columnContact As Global.System.Data.DataColumn
+        
+        Private columnUsername As Global.System.Data.DataColumn
+        
+        Private columnType As Global.System.Data.DataColumn
+        
+        Private columnStatus As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "viewusers"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property First_NameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFirst_Name
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Last_NameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLast_Name
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property ContactColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnContact
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property UsernameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnUsername
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property StatusColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnStatus
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As viewusersRow
+            Get
+                Return CType(Me.Rows(index),viewusersRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event viewusersRowChanging As viewusersRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event viewusersRowChanged As viewusersRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event viewusersRowDeleting As viewusersRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Event viewusersRowDeleted As viewusersRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Sub AddviewusersRow(ByVal row As viewusersRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overloads Function AddviewusersRow(ByVal First_Name As String, ByVal Last_Name As String, ByVal Contact As String, ByVal Username As String, ByVal Type As String, ByVal Status As String) As viewusersRow
+            Dim rowviewusersRow As viewusersRow = CType(Me.NewRow,viewusersRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, First_Name, Last_Name, Contact, Username, Type, Status}
+            rowviewusersRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowviewusersRow)
+            Return rowviewusersRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function FindByID(ByVal ID As Integer) As viewusersRow
+            Return CType(Me.Rows.Find(New Object() {ID}),viewusersRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As viewusersDataTable = CType(MyBase.Clone,viewusersDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New viewusersDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnID = MyBase.Columns("ID")
+            Me.columnFirst_Name = MyBase.Columns("First Name")
+            Me.columnLast_Name = MyBase.Columns("Last Name")
+            Me.columnContact = MyBase.Columns("Contact")
+            Me.columnUsername = MyBase.Columns("Username")
+            Me.columnType = MyBase.Columns("Type")
+            Me.columnStatus = MyBase.Columns("Status")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnID)
+            Me.columnFirst_Name = New Global.System.Data.DataColumn("First Name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFirst_Name)
+            Me.columnLast_Name = New Global.System.Data.DataColumn("Last Name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLast_Name)
+            Me.columnContact = New Global.System.Data.DataColumn("Contact", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnContact)
+            Me.columnUsername = New Global.System.Data.DataColumn("Username", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnUsername)
+            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnType)
+            Me.columnStatus = New Global.System.Data.DataColumn("Status", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnStatus)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
+            Me.columnID.AutoIncrement = true
+            Me.columnID.AutoIncrementSeed = -1
+            Me.columnID.AutoIncrementStep = -1
+            Me.columnID.AllowDBNull = false
+            Me.columnID.Unique = true
+            Me.columnFirst_Name.AllowDBNull = false
+            Me.columnFirst_Name.MaxLength = 30
+            Me.columnLast_Name.AllowDBNull = false
+            Me.columnLast_Name.MaxLength = 30
+            Me.columnContact.AllowDBNull = false
+            Me.columnContact.MaxLength = 30
+            Me.columnUsername.AllowDBNull = false
+            Me.columnUsername.MaxLength = 30
+            Me.columnType.AllowDBNull = false
+            Me.columnType.MaxLength = 7
+            Me.columnStatus.MaxLength = 8
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function NewviewusersRow() As viewusersRow
+            Return CType(Me.NewRow,viewusersRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New viewusersRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(viewusersRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.viewusersRowChangedEvent) Is Nothing) Then
+                RaiseEvent viewusersRowChanged(Me, New viewusersRowChangeEvent(CType(e.Row,viewusersRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.viewusersRowChangingEvent) Is Nothing) Then
+                RaiseEvent viewusersRowChanging(Me, New viewusersRowChangeEvent(CType(e.Row,viewusersRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.viewusersRowDeletedEvent) Is Nothing) Then
+                RaiseEvent viewusersRowDeleted(Me, New viewusersRowChangeEvent(CType(e.Row,viewusersRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.viewusersRowDeletingEvent) Is Nothing) Then
+                RaiseEvent viewusersRowDeleting(Me, New viewusersRowChangeEvent(CType(e.Row,viewusersRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub RemoveviewusersRow(ByVal row As viewusersRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dbpetsDataSet = New dbpetsDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "viewusersDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class petsDataTable
+        Inherits Global.System.Data.TypedTableBase(Of petsRow)
         
         Private columnID As Global.System.Data.DataColumn
         
@@ -301,13 +689,11 @@ Partial Public Class dbpetsDataSet
         
         Private columnContact As Global.System.Data.DataColumn
         
-        Private columnNotes As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "viewpetsactive"
+            Me.TableName = "pets"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -411,14 +797,6 @@ Partial Public Class dbpetsDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnNotes
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -429,50 +807,44 @@ Partial Public Class dbpetsDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As viewpetsactiveRow
+        Public Default ReadOnly Property Item(ByVal index As Integer) As petsRow
             Get
-                Return CType(Me.Rows(index),viewpetsactiveRow)
+                Return CType(Me.Rows(index),petsRow)
             End Get
         End Property
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event viewpetsactiveRowChanging As viewpetsactiveRowChangeEventHandler
+        Public Event petsRowChanging As petsRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event viewpetsactiveRowChanged As viewpetsactiveRowChangeEventHandler
+        Public Event petsRowChanged As petsRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event viewpetsactiveRowDeleting As viewpetsactiveRowChangeEventHandler
+        Public Event petsRowDeleting As petsRowChangeEventHandler
         
         <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Event viewpetsactiveRowDeleted As viewpetsactiveRowChangeEventHandler
+        Public Event petsRowDeleted As petsRowChangeEventHandler
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Sub AddviewpetsactiveRow(ByVal row As viewpetsactiveRow)
+        Public Overloads Sub AddpetsRow(ByVal row As petsRow)
             Me.Rows.Add(row)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddviewpetsactiveRow(ByVal Name As String, ByVal Birth As Date, ByVal Gender As String, ByVal Type As String, ByVal Breed As String, ByVal Owner As String, ByVal Address As String, ByVal Contact As String, ByVal Notes As String) As viewpetsactiveRow
-            Dim rowviewpetsactiveRow As viewpetsactiveRow = CType(Me.NewRow,viewpetsactiveRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, Name, Birth, Gender, Type, Breed, Owner, Address, Contact, Notes}
-            rowviewpetsactiveRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowviewpetsactiveRow)
-            Return rowviewpetsactiveRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function FindByID(ByVal ID As Integer) As viewpetsactiveRow
-            Return CType(Me.Rows.Find(New Object() {ID}),viewpetsactiveRow)
+        Public Overloads Function AddpetsRow(ByVal ID As Short, ByVal Name As String, ByVal Birth As Date, ByVal Gender As String, ByVal Type As String, ByVal Breed As String, ByVal Owner As String, ByVal Address As String, ByVal Contact As String) As petsRow
+            Dim rowpetsRow As petsRow = CType(Me.NewRow,petsRow)
+            Dim columnValuesArray() As Object = New Object() {ID, Name, Birth, Gender, Type, Breed, Owner, Address, Contact}
+            rowpetsRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowpetsRow)
+            Return rowpetsRow
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As viewpetsactiveDataTable = CType(MyBase.Clone,viewpetsactiveDataTable)
+            Dim cln As petsDataTable = CType(MyBase.Clone,petsDataTable)
             cln.InitVars
             Return cln
         End Function
@@ -480,7 +852,7 @@ Partial Public Class dbpetsDataSet
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New viewpetsactiveDataTable()
+            Return New petsDataTable()
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -495,13 +867,12 @@ Partial Public Class dbpetsDataSet
             Me.columnOwner = MyBase.Columns("Owner")
             Me.columnAddress = MyBase.Columns("Address")
             Me.columnContact = MyBase.Columns("Contact")
-            Me.columnNotes = MyBase.Columns("Notes")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnID)
             Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnName)
@@ -519,48 +890,39 @@ Partial Public Class dbpetsDataSet
             MyBase.Columns.Add(Me.columnAddress)
             Me.columnContact = New Global.System.Data.DataColumn("Contact", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnContact)
-            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnNotes)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
-            Me.columnID.AutoIncrement = true
-            Me.columnID.AutoIncrementSeed = -1
-            Me.columnID.AutoIncrementStep = -1
-            Me.columnID.AllowDBNull = false
-            Me.columnID.Unique = true
-            Me.columnName.MaxLength = 20
+            Me.columnID.ReadOnly = true
+            Me.columnName.ReadOnly = true
+            Me.columnBirth.ReadOnly = true
+            Me.columnGender.ReadOnly = true
             Me.columnGender.MaxLength = 6
-            Me.columnType.MaxLength = 30
-            Me.columnBreed.MaxLength = 20
-            Me.columnOwner.MaxLength = 20
-            Me.columnAddress.MaxLength = 30
-            Me.columnContact.MaxLength = 11
-            Me.columnNotes.MaxLength = 250
+            Me.columnType.ReadOnly = true
+            Me.columnBreed.ReadOnly = true
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function NewviewpetsactiveRow() As viewpetsactiveRow
-            Return CType(Me.NewRow,viewpetsactiveRow)
+        Public Function NewpetsRow() As petsRow
+            Return CType(Me.NewRow,petsRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New viewpetsactiveRow(builder)
+            Return New petsRow(builder)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(viewpetsactiveRow)
+            Return GetType(petsRow)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
-            If (Not (Me.viewpetsactiveRowChangedEvent) Is Nothing) Then
-                RaiseEvent viewpetsactiveRowChanged(Me, New viewpetsactiveRowChangeEvent(CType(e.Row,viewpetsactiveRow), e.Action))
+            If (Not (Me.petsRowChangedEvent) Is Nothing) Then
+                RaiseEvent petsRowChanged(Me, New petsRowChangeEvent(CType(e.Row,petsRow), e.Action))
             End If
         End Sub
         
@@ -568,8 +930,8 @@ Partial Public Class dbpetsDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
-            If (Not (Me.viewpetsactiveRowChangingEvent) Is Nothing) Then
-                RaiseEvent viewpetsactiveRowChanging(Me, New viewpetsactiveRowChangeEvent(CType(e.Row,viewpetsactiveRow), e.Action))
+            If (Not (Me.petsRowChangingEvent) Is Nothing) Then
+                RaiseEvent petsRowChanging(Me, New petsRowChangeEvent(CType(e.Row,petsRow), e.Action))
             End If
         End Sub
         
@@ -577,8 +939,8 @@ Partial Public Class dbpetsDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
-            If (Not (Me.viewpetsactiveRowDeletedEvent) Is Nothing) Then
-                RaiseEvent viewpetsactiveRowDeleted(Me, New viewpetsactiveRowChangeEvent(CType(e.Row,viewpetsactiveRow), e.Action))
+            If (Not (Me.petsRowDeletedEvent) Is Nothing) Then
+                RaiseEvent petsRowDeleted(Me, New petsRowChangeEvent(CType(e.Row,petsRow), e.Action))
             End If
         End Sub
         
@@ -586,14 +948,14 @@ Partial Public Class dbpetsDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
-            If (Not (Me.viewpetsactiveRowDeletingEvent) Is Nothing) Then
-                RaiseEvent viewpetsactiveRowDeleting(Me, New viewpetsactiveRowChangeEvent(CType(e.Row,viewpetsactiveRow), e.Action))
+            If (Not (Me.petsRowDeletingEvent) Is Nothing) Then
+                RaiseEvent petsRowDeleting(Me, New petsRowChangeEvent(CType(e.Row,petsRow), e.Action))
             End If
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub RemoveviewpetsactiveRow(ByVal row As viewpetsactiveRow)
+        Public Sub RemovepetsRow(ByVal row As petsRow)
             Me.Rows.Remove(row)
         End Sub
         
@@ -620,7 +982,7 @@ Partial Public Class dbpetsDataSet
             type.Attributes.Add(attribute1)
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "viewpetsactiveDataTable"
+            attribute2.FixedValue = "petsDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -667,26 +1029,139 @@ Partial Public Class dbpetsDataSet
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
-    Partial Public Class viewpetsactiveRow
+    Partial Public Class viewusersRow
         Inherits Global.System.Data.DataRow
         
-        Private tableviewpetsactive As viewpetsactiveDataTable
+        Private tableviewusers As viewusersDataTable
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
             MyBase.New(rb)
-            Me.tableviewpetsactive = CType(Me.Table,viewpetsactiveDataTable)
+            Me.tableviewusers = CType(Me.Table,viewusersDataTable)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property ID() As Integer
             Get
-                Return CType(Me(Me.tableviewpetsactive.IDColumn),Integer)
+                Return CType(Me(Me.tableviewusers.IDColumn),Integer)
             End Get
             Set
-                Me(Me.tableviewpetsactive.IDColumn) = value
+                Me(Me.tableviewusers.IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property First_Name() As String
+            Get
+                Return CType(Me(Me.tableviewusers.First_NameColumn),String)
+            End Get
+            Set
+                Me(Me.tableviewusers.First_NameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Last_Name() As String
+            Get
+                Return CType(Me(Me.tableviewusers.Last_NameColumn),String)
+            End Get
+            Set
+                Me(Me.tableviewusers.Last_NameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Contact() As String
+            Get
+                Return CType(Me(Me.tableviewusers.ContactColumn),String)
+            End Get
+            Set
+                Me(Me.tableviewusers.ContactColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Username() As String
+            Get
+                Return CType(Me(Me.tableviewusers.UsernameColumn),String)
+            End Get
+            Set
+                Me(Me.tableviewusers.UsernameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Type() As String
+            Get
+                Return CType(Me(Me.tableviewusers.TypeColumn),String)
+            End Get
+            Set
+                Me(Me.tableviewusers.TypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Status() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableviewusers.StatusColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Status' in table 'viewusers' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableviewusers.StatusColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsStatusNull() As Boolean
+            Return Me.IsNull(Me.tableviewusers.StatusColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetStatusNull()
+            Me(Me.tableviewusers.StatusColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class petsRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tablepets As petsDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tablepets = CType(Me.Table,petsDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property ID() As Short
+            Get
+                Try 
+                    Return CType(Me(Me.tablepets.IDColumn),Short)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ID' in table 'pets' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablepets.IDColumn) = value
             End Set
         End Property
         
@@ -695,13 +1170,13 @@ Partial Public Class dbpetsDataSet
         Public Property Name() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.NameColumn),String)
+                    Return CType(Me(Me.tablepets.NameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Name' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Name' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.NameColumn) = value
+                Me(Me.tablepets.NameColumn) = value
             End Set
         End Property
         
@@ -710,13 +1185,13 @@ Partial Public Class dbpetsDataSet
         Public Property Birth() As Date
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.BirthColumn),Date)
+                    Return CType(Me(Me.tablepets.BirthColumn),Date)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Birth' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Birth' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.BirthColumn) = value
+                Me(Me.tablepets.BirthColumn) = value
             End Set
         End Property
         
@@ -725,13 +1200,13 @@ Partial Public Class dbpetsDataSet
         Public Property Gender() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.GenderColumn),String)
+                    Return CType(Me(Me.tablepets.GenderColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Gender' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Gender' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.GenderColumn) = value
+                Me(Me.tablepets.GenderColumn) = value
             End Set
         End Property
         
@@ -740,13 +1215,13 @@ Partial Public Class dbpetsDataSet
         Public Property Type() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.TypeColumn),String)
+                    Return CType(Me(Me.tablepets.TypeColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Type' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Type' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.TypeColumn) = value
+                Me(Me.tablepets.TypeColumn) = value
             End Set
         End Property
         
@@ -755,13 +1230,13 @@ Partial Public Class dbpetsDataSet
         Public Property Breed() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.BreedColumn),String)
+                    Return CType(Me(Me.tablepets.BreedColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Breed' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Breed' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.BreedColumn) = value
+                Me(Me.tablepets.BreedColumn) = value
             End Set
         End Property
         
@@ -770,13 +1245,13 @@ Partial Public Class dbpetsDataSet
         Public Property Owner() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.OwnerColumn),String)
+                    Return CType(Me(Me.tablepets.OwnerColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Owner' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Owner' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.OwnerColumn) = value
+                Me(Me.tablepets.OwnerColumn) = value
             End Set
         End Property
         
@@ -785,13 +1260,13 @@ Partial Public Class dbpetsDataSet
         Public Property Address() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.AddressColumn),String)
+                    Return CType(Me(Me.tablepets.AddressColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Address' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Address' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.AddressColumn) = value
+                Me(Me.tablepets.AddressColumn) = value
             End Set
         End Property
         
@@ -800,137 +1275,122 @@ Partial Public Class dbpetsDataSet
         Public Property Contact() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableviewpetsactive.ContactColumn),String)
+                    Return CType(Me(Me.tablepets.ContactColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Contact' in table 'viewpetsactive' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Contact' in table 'pets' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableviewpetsactive.ContactColumn) = value
+                Me(Me.tablepets.ContactColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Notes() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableviewpetsactive.NotesColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'viewpetsactive' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableviewpetsactive.NotesColumn) = value
-            End Set
-        End Property
+        Public Function IsIDNull() As Boolean
+            Return Me.IsNull(Me.tablepets.IDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetIDNull()
+            Me(Me.tablepets.IDColumn) = Global.System.Convert.DBNull
+        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsNameNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.NameColumn)
+            Return Me.IsNull(Me.tablepets.NameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetNameNull()
-            Me(Me.tableviewpetsactive.NameColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.NameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsBirthNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.BirthColumn)
+            Return Me.IsNull(Me.tablepets.BirthColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetBirthNull()
-            Me(Me.tableviewpetsactive.BirthColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.BirthColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsGenderNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.GenderColumn)
+            Return Me.IsNull(Me.tablepets.GenderColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetGenderNull()
-            Me(Me.tableviewpetsactive.GenderColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.GenderColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsTypeNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.TypeColumn)
+            Return Me.IsNull(Me.tablepets.TypeColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetTypeNull()
-            Me(Me.tableviewpetsactive.TypeColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.TypeColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsBreedNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.BreedColumn)
+            Return Me.IsNull(Me.tablepets.BreedColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetBreedNull()
-            Me(Me.tableviewpetsactive.BreedColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.BreedColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsOwnerNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.OwnerColumn)
+            Return Me.IsNull(Me.tablepets.OwnerColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetOwnerNull()
-            Me(Me.tableviewpetsactive.OwnerColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.OwnerColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsAddressNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.AddressColumn)
+            Return Me.IsNull(Me.tablepets.AddressColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetAddressNull()
-            Me(Me.tableviewpetsactive.AddressColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.AddressColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function IsContactNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.ContactColumn)
+            Return Me.IsNull(Me.tablepets.ContactColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub SetContactNull()
-            Me(Me.tableviewpetsactive.ContactColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Function IsNotesNull() As Boolean
-            Return Me.IsNull(Me.tableviewpetsactive.NotesColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub SetNotesNull()
-            Me(Me.tableviewpetsactive.NotesColumn) = Global.System.Convert.DBNull
+            Me(Me.tablepets.ContactColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -938,16 +1398,16 @@ Partial Public Class dbpetsDataSet
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Public Class viewpetsactiveRowChangeEvent
+    Public Class viewusersRowChangeEvent
         Inherits Global.System.EventArgs
         
-        Private eventRow As viewpetsactiveRow
+        Private eventRow As viewusersRow
         
         Private eventAction As Global.System.Data.DataRowAction
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Sub New(ByVal row As viewpetsactiveRow, ByVal action As Global.System.Data.DataRowAction)
+        Public Sub New(ByVal row As viewusersRow, ByVal action As Global.System.Data.DataRowAction)
             MyBase.New
             Me.eventRow = row
             Me.eventAction = action
@@ -955,7 +1415,43 @@ Partial Public Class dbpetsDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public ReadOnly Property Row() As viewpetsactiveRow
+        Public ReadOnly Property Row() As viewusersRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+    Public Class petsRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As petsRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub New(ByVal row As petsRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property Row() As petsRow
             Get
                 Return Me.eventRow
             End Get
@@ -982,7 +1478,7 @@ Namespace dbpetsDataSetTableAdapters
      Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
      Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-    Partial Public Class viewpetsactiveTableAdapter
+    Partial Public Class viewusersTableAdapter
         Inherits Global.System.ComponentModel.Component
         
         Private WithEvents _adapter As Global.MySql.Data.MySqlClient.MySqlDataAdapter
@@ -1099,17 +1595,14 @@ Namespace dbpetsDataSetTableAdapters
             Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "viewpetsactive"
+            tableMapping.DataSetTable = "viewusers"
             tableMapping.ColumnMappings.Add("ID", "ID")
-            tableMapping.ColumnMappings.Add("Name", "Name")
-            tableMapping.ColumnMappings.Add("Birth", "Birth")
-            tableMapping.ColumnMappings.Add("Gender", "Gender")
-            tableMapping.ColumnMappings.Add("Type", "Type")
-            tableMapping.ColumnMappings.Add("Breed", "Breed")
-            tableMapping.ColumnMappings.Add("Owner", "Owner")
-            tableMapping.ColumnMappings.Add("Address", "Address")
+            tableMapping.ColumnMappings.Add("First Name", "First Name")
+            tableMapping.ColumnMappings.Add("Last Name", "Last Name")
             tableMapping.ColumnMappings.Add("Contact", "Contact")
-            tableMapping.ColumnMappings.Add("Notes", "Notes")
+            tableMapping.ColumnMappings.Add("Username", "Username")
+            tableMapping.ColumnMappings.Add("Type", "Type")
+            tableMapping.ColumnMappings.Add("Status", "Status")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -1126,8 +1619,8 @@ Namespace dbpetsDataSetTableAdapters
             Me._commandCollection = New Global.MySql.Data.MySqlClient.MySqlCommand(0) {}
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT `ID`, `Name`, `Birth`, `Gender`, `Type`, `Breed`, `Owner`, `Address`, `Con"& _ 
-                "tact`, `Notes` FROM `dbpets`.`viewpetsactive`"
+            Me._commandCollection(0).CommandText = "SELECT `ID`, `First Name`, `Last Name`, `Contact`, `Username`, `Type`, `Status` F"& _ 
+                "ROM `dbpets`.`viewusers`"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1135,7 +1628,7 @@ Namespace dbpetsDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As dbpetsDataSet.viewpetsactiveDataTable) As Integer
+        Public Overloads Overridable Function Fill(ByVal dataTable As dbpetsDataSet.viewusersDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -1148,9 +1641,9 @@ Namespace dbpetsDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData() As dbpetsDataSet.viewpetsactiveDataTable
+        Public Overloads Overridable Function GetData() As dbpetsDataSet.viewusersDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            Dim dataTable As dbpetsDataSet.viewpetsactiveDataTable = New dbpetsDataSet.viewpetsactiveDataTable()
+            Dim dataTable As dbpetsDataSet.viewusersDataTable = New dbpetsDataSet.viewusersDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function

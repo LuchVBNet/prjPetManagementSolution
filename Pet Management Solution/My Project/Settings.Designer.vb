@@ -63,6 +63,17 @@ Namespace My
                 Return CType(Me("dbpetsConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("server=luchmewep.mysql.database.azure.com;user id=luchmewep@luchmewep;password=B3"& _ 
+            "2eeee0.;database=dbpets")>  _
+        Public ReadOnly Property dbpetsOnline() As String
+            Get
+                Return CType(Me("dbpetsOnline"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

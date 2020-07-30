@@ -14,6 +14,22 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Luchavez Internet\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +62,21 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EBE8215DA1AC0C5015C9152946A26D0DA1DCECF7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Pet Management Solution_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -81,10 +112,29 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="crPets.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crPets.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dbpetsDataSet1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dbpetsDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmAboutUs.Designer.vb">
+      <DependentUpon>frmAboutUs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAboutUs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAudit.Designer.vb">
+      <DependentUpon>frmAudit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAudit.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmBreed.Designer.vb">
       <DependentUpon>frmBreed.vb</DependentUpon>
@@ -111,11 +161,31 @@
     <Compile Include="frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSplash.Designer.vb">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsers.Designer.vb">
+      <DependentUpon>frmUsers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User.vb" />
     <Compile Include="modPet.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -133,13 +203,23 @@
     <Compile Include="frmType.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="rptPetsActive.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rptPetsActive.rpt</DependentUpon>
-    </Compile>
+    <Compile Include="MySQLKit.vb" />
+    <Compile Include="Pet.vb" />
+    <Compile Include="PetBreed.vb" />
+    <Compile Include="PetOwner.vb" />
+    <Compile Include="PetType.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="crPets.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crPets.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAboutUs.resx">
+      <DependentUpon>frmAboutUs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAudit.resx">
+      <DependentUpon>frmAudit.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBreed.resx">
       <DependentUpon>frmBreed.vb</DependentUpon>
     </EmbeddedResource>
@@ -152,8 +232,17 @@
     <EmbeddedResource Include="frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmType.resx">
       <DependentUpon>frmType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsers.resx">
+      <DependentUpon>frmUsers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -161,12 +250,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="rptPetsActive.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptPetsActive.vb</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="dbpetsDataSet1.xsc">
       <DependentUpon>dbpetsDataSet1.xsd</DependentUpon>
     </None>
@@ -178,6 +264,7 @@
     <None Include="dbpetsDataSet1.xss">
       <DependentUpon>dbpetsDataSet1.xsd</DependentUpon>
     </None>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -191,6 +278,22 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pet Management Solution_TemporaryKey.pfx" />
+    <None Include="Resources\PetShop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

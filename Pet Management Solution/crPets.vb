@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class rptPetList
+Public Class crPets
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class rptPetList
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "rptPetList.rpt"
+            Return "crPets.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class rptPetList
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "Pet_Management_Solution.rptPetList.rpt"
+            Return "Pet_Management_Solution.crPets.rpt"
         End Get
         Set
             'Do nothing
@@ -78,7 +78,7 @@ Public Class rptPetList
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property DetailSection1() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,15 +86,23 @@ Public Class rptPetList
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
+        End Get
+    End Property
+    
+    <Browsable(false),  _
+     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
+    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
+        Get
+            Return Me.ReportDefinition.Sections(5)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedrptPetList
+Public Class CachedcrPets
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +144,7 @@ Public Class CachedrptPetList
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As rptPetList = New rptPetList()
+        Dim rpt As crPets = New crPets()
         rpt.Site = Me.Site
         Return rpt
     End Function

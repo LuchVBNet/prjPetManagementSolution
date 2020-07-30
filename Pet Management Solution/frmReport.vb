@@ -1,8 +1,27 @@
 ﻿Public Class frmReport
-    Private Sub btnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
-        'Dim strQuery As String = "SELECT petID, petName, petBirthdate, petGender, tbltype.typeName, tblbreed.breedname, petNotes, tblowner.ownerName, tblowner.ownerAddress, tblowner.ownerContactNumber, petStatus FROM tblpet INNER JOIN tblbreed ON tblpet.petBreed = tblbreed.breedID INNER JOIN tbltype ON tbltype.typeID = tblbreed.typeID INNER JOIN tblowner on tblowner.ownerID = tblpet.ownerID ORDER BY petID"
-        'Dim strQuery As String = "SELECT petID, petName, petGender, petBirthdate, petStatus, petNotes FROM tblPet"
-        Dim strQuery As String = "SELECT * FROM viewpetsactive"
-        DisplayReport(strQuery, rptPetsActive1, CrystalReportViewer1)
+    Private Sub frmReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        crPets1.SummaryInfo.ReportTitle = My.Application.Info.ProductName
+        crPets1.SummaryInfo.ReportAuthor = $"By {auth.FirstName} {auth.LastName}"
+        Dim strQuery As String
+        strQuery = "SELECT * FROM viewpetsactive"
+        crPets1.Subreports.Item("ActivePets").SetDataSource(dbKit.GetQuery(strQuery))
+        strQuery = "SELECT * FROM viewpetsinactive"
+        crPets1.Subreports.Item("InactivePets").SetDataSource(dbKit.GetQuery(strQuery))
+        CrystalReportViewer1.ReportSource = crPets1
+        CrystalReportViewer1.Refresh()
+        'Add Print Button Listener
+        For Each ctrl As Control In CrystalReportViewer1.Controls
+            If TypeOf ctrl Is System.Windows.Forms.ToolStrip Then
+                AddHandler(CType(ctrl, ToolStrip).Items(1).Click), AddressOf AfterPrint
+            End If
+        Next
     End Sub
+
+    Private Sub AfterPrint(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'Create action after print
+        Dim strQuery As String = String.Empty
+        LogPrint(strQuery, "Print form")
+        dbKit.RunQuery(strQuery)
+    End Sub
+
 End Class

@@ -4,131 +4,60 @@
 Imports MySql.Data.MySqlClient
 Imports CrystalDecisions.Windows.Forms
 Module modPet
-    Private dbConn As MySqlConnection
-    Private sqlCommand As MySqlCommand
-    Private da As MySqlDataAdapter
-    Private dt As DataTable
-    Dim strConn As String = "Server=localhost; User ID=root; Database=dbpets; Convert Zero Datetime=True"
-
-    Public Sub dbConnectionTest()
-        If dbConnection() Then
-            MessageBox.Show("DB test connection is successful.", "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-            MessageBox.Show("Error: dbConnectionTest()", "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+    Public auth As User
+    Public dbKit As MySQLKit
+    Sub New()
+        dbKit = New MySQLKit("localhost", "dbpets", "root", "")
+        'dbKit = New MySQLKit("luchmewep.mysql.database.azure.com", "dbpets", "luchmewep@luchmewep", "B32eeee0.")
     End Sub
 
-    Public Function dbConnection() As Boolean
-        Try
-            dbConn = New MySqlConnection(strConn)
-            dbConn.Open()
+    'Audit Functions
+    Public Sub LogInvalidLogin(ByRef strQuery As String, intID As Integer)
+        strQuery = $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 0, {intID}, 'Login form', 'Invalid username/password')"
+    End Sub
+
+    Public Sub LogValidLogin(ByRef strQuery As String, intID As Integer)
+        strQuery = $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 1, {intID}, 'Login form', 'Successful login.')"
+    End Sub
+
+    Public Sub LogLogout(ByRef strQuery As String)
+        strQuery = $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 6, {auth.ID}, 'Login form', 'Logged out successfully.')"
+    End Sub
+
+    Public Sub LogCreate(ByRef strQuery As String, strForm As String, strObject As String, intID As Integer)
+        strQuery = $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 2, {auth.ID}, '{strForm}', 'Create new {strObject} - #{intID}.')"
+    End Sub
+
+    Public Function LogUpdate(ByRef strQuery As String, strForm As String, strColumn As String, strObject As String, intID As Integer, oldValue As String, newValue As String) As Boolean
+        If oldValue <> newValue Then
+            strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 3, {auth.ID}, '{strForm}', 'Update {strColumn} of {strObject} - #{intID} from ""{oldValue}"" to ""{newValue}"".');"
+            'MsgBox($"{prevValue} to {newValue}")
             Return True
-        Catch ex As Exception
-            MessageBox.Show("Error: dbConnection() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
             Return False
-        Finally
-            dbConn.Close()
-        End Try
+        End If
     End Function
 
-    Public Sub DisplayRecords(strSQL As String, dg As DataGridView)
-        Try
-            dbConn.Open()
-            da = New MySqlDataAdapter(strSQL, dbConn)
-            dt = New DataTable
-            da.Fill(dt)
-            dg.DataSource = dt
-        Catch ex As Exception
-            MessageBox.Show("Error: DisplayRecords() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-        End Try
+    Public Function LogUpdatePassword(ByRef strQuery As String, strForm As String, strColumn As String, strObject As String, intID As Integer, strUsername As String, newValue As String) As Boolean
+        If auth.CheckPassword(strUsername, newValue) Then
+            strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 3, {auth.ID}, '{strForm}', 'Update {strColumn} of {strObject} - #{intID}.');"
+            'MsgBox($"{prevValue} to {newValue}")
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub LogDeactivate(ByRef strQuery As String, strForm As String, strObject As String, intID As Integer)
+        strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 4, {auth.ID}, '{strForm}', 'Deactivated {strObject} - #{intID}.')"
     End Sub
 
-    Public Sub DisplayReport(strSQL As String, ByRef report As rptPetsActive, ByRef reportViewer As CrystalReportViewer)
-        Try
-            dbConn.Open()
-            da = New MySqlDataAdapter(strSQL, dbConn)
-            dt = New DataTable
-            da.Fill(dt)
-            'MsgBox(dt.Rows.Count)
-            report.SetDataSource(dt)
-            reportViewer.ReportSource = report
-            reportViewer.Refresh()
-        Catch ex As Exception
-            MessageBox.Show("Error: DisplayReport() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-
-        End Try
+    Public Sub LogActivate(ByRef strQuery As String, strForm As String, strObject As String, intID As Integer)
+        strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 4, {auth.ID}, '{strForm}', 'Activated {strObject} - #{intID}.')"
     End Sub
 
-    Public Function RecordCount() As Integer
-        Dim count As Integer = 0
-        Dim strSQL As String = "SELECT * FROM tblpet ORDER BY petID DESC LIMIT 1"
-        Try
-            dbConn.Open()
-            da = New MySqlDataAdapter(strSQL, dbConn)
-            dt = New DataTable
-            da.Fill(dt)
-            If dt.Rows.Count > 0 Then
-                count = dt.Rows(0).Item("petID")
-            Else
-                count = 0
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error: RecordCount() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-        End Try
-        Return count
-    End Function
-
-    Public Function GetPetType(intTypeID As Integer) As String
-        Dim strSQL As String = "SELECT typeName FROM tbltype WHERE typeID = " & intTypeID.ToString
-        Try
-            dbConn.Open()
-            da = New MySqlDataAdapter(strSQL, dbConn)
-            dt = New DataTable
-            da.Fill(dt)
-            If dt.Rows.Count > 0 Then
-                Return dt.Rows(0).Item("typeName")
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error: GetPetType() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-        End Try
-        Return String.Empty
-    End Function
-
-    Public Function LoadToComboBox(strSQL As String) As DataTable
-        Try
-            dbConn.Open()
-            da = New MySqlDataAdapter(strSQL, dbConn)
-            dt = New DataTable
-            da.Fill(dt)
-        Catch ex As Exception
-            MessageBox.Show("Error: LoadToComboBox() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-        End Try
-        Return dt
-    End Function
-
-    Public Sub SQLManager(strSQL As String, strMsg As String)
-        Try
-            dbConn.Open()
-            sqlCommand = New MySqlCommand(strSQL, dbConn)
-            With sqlCommand
-                .CommandType = CommandType.Text
-                .ExecuteNonQuery()
-            End With
-            MessageBox.Show(strMsg, "Pet DMBS", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MessageBox.Show("Error: SQLManager() " & ex.Message, "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            dbConn.Close()
-        End Try
+    Public Sub LogPrint(ByRef strQuery As String, strForm As String)
+        strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 5, {auth.ID}, '{strForm}', 'Print Inactive and Active Pets.')"
     End Sub
+
 End Module

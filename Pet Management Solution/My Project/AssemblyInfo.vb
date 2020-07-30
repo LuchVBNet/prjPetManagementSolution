@@ -9,8 +9,8 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Pet Management Solution")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyDescription("Pet Management Solution is an application that aims to help Pet Shops in organizing their pet recording system.")>
+<Assembly: AssemblyCompany("James Carlo Luchavez")>
 <Assembly: AssemblyProduct("Pet Management Solution")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")>
