@@ -6,30 +6,7 @@
         <Connections>
           <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="dbpetsConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="dbpetsConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Pet_Management_Solution.My.MySettings.GlobalReference.Default.dbpetsConnectionString" Provider="MySql.Data.MySqlClient" />
         </Connections>
-        <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="viewusersTableAdapter" GeneratorDataComponentClassName="viewusersTableAdapter" Name="viewuser" UserDataComponentName="viewusersTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="dbpetsConnectionString (MySettings)" DbObjectName="dbpets.viewuser" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT `ID`, `First Name`, `Last Name`, `Contact`, `Username`, `Type`, `Status` FROM `dbpets`.`viewuser`</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="ID" DataSetColumn="ID" />
-              <Mapping SourceColumn="First Name" DataSetColumn="First Name" />
-              <Mapping SourceColumn="Last Name" DataSetColumn="Last Name" />
-              <Mapping SourceColumn="Contact" DataSetColumn="Contact" />
-              <Mapping SourceColumn="Username" DataSetColumn="Username" />
-              <Mapping SourceColumn="Type" DataSetColumn="Type" />
-              <Mapping SourceColumn="Status" DataSetColumn="Status" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
-        </Tables>
+        <Tables />
         <Sources />
       </DataSource>
     </xs:appinfo>
@@ -37,56 +14,7 @@
   <xs:element name="dbpetsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="dbpetsDataSet" msprop:Generator_UserDSName="dbpetsDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="viewuser" msprop:Generator_TableClassName="viewusersDataTable" msprop:Generator_TableVarName="tableviewusers" msprop:Generator_TablePropName="viewuser" msprop:Generator_RowDeletingName="viewusersRowDeleting" msprop:Generator_RowChangingName="viewusersRowChanging" msprop:Generator_RowEvHandlerName="viewusersRowChangeEventHandler" msprop:Generator_RowDeletedName="viewusersRowDeleted" msprop:Generator_UserTableName="viewuser" msprop:Generator_RowChangedName="viewusersRowChanged" msprop:Generator_RowEvArgName="viewusersRowChangeEvent" msprop:Generator_RowClassName="viewusersRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
-              <xs:element name="First_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnFirst_Name" msprop:Generator_ColumnPropNameInRow="First_Name" msprop:Generator_ColumnPropNameInTable="First_NameColumn" msprop:Generator_UserColumnName="First Name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Last_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnLast_Name" msprop:Generator_ColumnPropNameInRow="Last_Name" msprop:Generator_ColumnPropNameInTable="Last_NameColumn" msprop:Generator_UserColumnName="Last Name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Contact" msprop:Generator_ColumnVarNameInTable="columnContact" msprop:Generator_ColumnPropNameInRow="Contact" msprop:Generator_ColumnPropNameInTable="ContactColumn" msprop:Generator_UserColumnName="Contact">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Username" msprop:Generator_ColumnVarNameInTable="columnUsername" msprop:Generator_ColumnPropNameInRow="Username" msprop:Generator_ColumnPropNameInTable="UsernameColumn" msprop:Generator_UserColumnName="Username">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="7" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="8" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="pets" msprop:Generator_TableClassName="petsDataTable" msprop:Generator_TableVarName="tablepets" msprop:Generator_RowChangedName="petsRowChanged" msprop:Generator_TablePropName="pets" msprop:Generator_RowDeletingName="petsRowDeleting" msprop:Generator_RowChangingName="petsRowChanging" msprop:Generator_RowEvHandlerName="petsRowChangeEventHandler" msprop:Generator_RowDeletedName="petsRowDeleted" msprop:Generator_RowClassName="petsRow" msprop:Generator_UserTableName="pets" msprop:Generator_RowEvArgName="petsRowChangeEvent">
+        <xs:element name="pets" msprop:Generator_TableClassName="petsDataTable" msprop:Generator_TableVarName="tablepets" msprop:Generator_TablePropName="pets" msprop:Generator_RowDeletingName="petsRowDeleting" msprop:Generator_RowChangingName="petsRowChanging" msprop:Generator_RowEvHandlerName="petsRowChangeEventHandler" msprop:Generator_RowDeletedName="petsRowDeleted" msprop:Generator_UserTableName="pets" msprop:Generator_RowChangedName="petsRowChanged" msprop:Generator_RowEvArgName="petsRowChangeEvent" msprop:Generator_RowClassName="petsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:short" minOccurs="0" />
@@ -109,9 +37,5 @@
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:viewuser" />
-      <xs:field xpath="mstns:ID" />
-    </xs:unique>
   </xs:element>
 </xs:schema>
