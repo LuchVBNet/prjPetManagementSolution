@@ -36,7 +36,7 @@
         Dim strQuery As String = dbKit.GetSearchQuery(User.ViewName, txtSearch.Text.Trim, If(rdoAll.Checked, String.Empty, If(rdoActive.Checked, "Active", "Inactive")))
         If tabViews.SelectedTab IsNot Nothing AndAlso tabViews.SelectedTab.Text = "Grid View" Then
             pnlFlow.SuspendLayout()
-            pnlFlow.Controls.Clear()
+            DisposeEverything(pnlFlow)
             For Each row As DataRow In dbKit.GetQuery(strQuery).Rows
                 pnlFlow.Controls.Add(New pnlUser(CType(row(0), Integer)))
             Next
@@ -91,6 +91,9 @@
     Private Sub btnToggleStatus_Click(sender As Object, e As EventArgs) Handles btnToggleStatus.Click
         mod_user.ToggleStatus()
         btnClear.PerformClick()
+        If tabViews.SelectedTab IsNot Nothing AndAlso tabViews.SelectedTab.Text = "Table View" Then
+            refreshDataGridView()
+        End If
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
@@ -101,7 +104,7 @@
         txtUsername.Clear()
         txtPassword.Clear()
         txtPassword2.Clear()
-        btnToggleStatus.Text = "Toggle"
+        btnToggleStatus.Text = "TOGGLE"
         btnToggleStatus.BackColor = System.Drawing.SystemColors.Control
         btnToggleStatus.Enabled = False
         cboType.SelectedIndex = 0

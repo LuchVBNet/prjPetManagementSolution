@@ -39,13 +39,16 @@ Public Class frmMain
     Private Sub btnToggleStatus_Click(sender As Object, e As EventArgs) Handles btnToggleStatus.Click
         mod_pet.ToggleStatus()
         btnClear.PerformClick()
+        If tabViews.SelectedTab IsNot Nothing AndAlso tabViews.SelectedTab.Text = "Table View" Then
+            refreshDataGridView()
+        End If
     End Sub
 
     Private Sub refreshDataGridView() Handles rdoInactive.CheckedChanged, rdoAll.CheckedChanged, rdoActive.CheckedChanged, tabViews.SelectedIndexChanged
         Dim strQuery As String = dbKit.GetSearchQuery(Pet.ViewName, txtSearch.Text.Trim, If(rdoAll.Checked, String.Empty, If(rdoActive.Checked, "Active", "Inactive")))
         If tabViews.SelectedTab IsNot Nothing AndAlso tabViews.SelectedTab.Text = "Grid View" Then 'this is for grid view
             pnlFlow.SuspendLayout()
-            pnlFlow.Controls.Clear()
+            DisposeEverything(pnlFlow)
             For Each row As DataRow In dbKit.GetQuery(strQuery).Rows
                 pnlFlow.Controls.Add(New pnlPet(CType(row(0), Integer)))
             Next
@@ -53,6 +56,7 @@ Public Class frmMain
         Else 'this is for table
             dbKit.PopulateDataGridView(strQuery, dgPets)
         End If
+        GC.Collect()
     End Sub
 
     Public Sub PetSelected(intID As Integer)
@@ -194,6 +198,7 @@ Public Class frmMain
     End Sub
 
     Private Sub AuditLogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AuditLogsToolStripMenuItem.Click
+        frmAudit.userName = String.Empty
         Dim form As New frmAudit
         form.ShowDialog()
     End Sub

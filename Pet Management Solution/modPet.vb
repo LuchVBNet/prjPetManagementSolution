@@ -3,6 +3,7 @@
 
 Imports MySql.Data.MySqlClient
 Imports CrystalDecisions.Windows.Forms
+Imports System.ComponentModel
 Module modPet
     Public auth As User
     Public mod_user As User
@@ -12,7 +13,10 @@ Module modPet
     Public mod_owner As PetOwner
     Public dbKit As MySQLKit
     Sub New()
+        ' LOCAL
         dbKit = New MySQLKit("localhost", "dbpets", "root", "")
+
+        ' ONLINE
         'dbKit = New MySQLKit("btmownbmbobe9hjv3aek-mysql.services.clever-cloud.com", "btmownbmbobe9hjv3aek", "ub8otayzjqumpkxr", "fxsfBTdKh05iKOzwGyBv")
         'dbKit = New MySQLKit("luchmewep.mysql.database.azure.com", "dbpets", "luchmewep@luchmewep", "B32eeee0.")
     End Sub
@@ -65,6 +69,14 @@ Module modPet
 
     Public Sub LogPrint(ByRef strQuery As String, strForm As String)
         strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 5, {auth.ID}, '{strForm}', 'Print Inactive and Active Pets.')"
+    End Sub
+
+    'Reusable disposer
+    Public Sub DisposeEverything(panelFlow As FlowLayoutPanel)
+        For Each control As Control In panelFlow.Controls
+            control.Dispose()
+        Next
+        panelFlow.Controls.Clear()
     End Sub
 
 End Module

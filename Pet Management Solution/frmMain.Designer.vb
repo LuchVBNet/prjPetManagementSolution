@@ -33,7 +33,6 @@ Partial Class frmMain
         Me.dgPets = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dtpBirth = New System.Windows.Forms.DateTimePicker()
-        Me.btnToggleStatus = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnConfirm = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -79,6 +78,8 @@ Partial Class frmMain
         Me.tabViews = New System.Windows.Forms.TabControl()
         Me.tab1 = New System.Windows.Forms.TabPage()
         Me.tab2 = New System.Windows.Forms.TabPage()
+        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
+        Me.btnToggleStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgPets, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,6 +90,7 @@ Partial Class frmMain
         Me.tabViews.SuspendLayout()
         Me.tab1.SuspendLayout()
         Me.tab2.SuspendLayout()
+        Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -189,7 +191,6 @@ Partial Class frmMain
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.dtpBirth)
-        Me.GroupBox1.Controls.Add(Me.btnToggleStatus)
         Me.GroupBox1.Controls.Add(Me.btnClear)
         Me.GroupBox1.Controls.Add(Me.btnConfirm)
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
@@ -229,32 +230,27 @@ Partial Class frmMain
         Me.dtpBirth.TabIndex = 5
         Me.dtpBirth.Value = New Date(2020, 8, 3, 0, 0, 0, 0)
         '
-        'btnToggleStatus
-        '
-        Me.btnToggleStatus.Location = New System.Drawing.Point(212, 371)
-        Me.btnToggleStatus.Name = "btnToggleStatus"
-        Me.btnToggleStatus.Size = New System.Drawing.Size(93, 23)
-        Me.btnToggleStatus.TabIndex = 20
-        Me.btnToggleStatus.Text = "TOGGLE"
-        Me.btnToggleStatus.UseVisualStyleBackColor = True
-        '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(113, 371)
+        Me.btnClear.BackColor = System.Drawing.Color.Salmon
+        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClear.Location = New System.Drawing.Point(163, 372)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(93, 23)
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 19
         Me.btnClear.Text = "CLEAR"
-        Me.btnClear.UseVisualStyleBackColor = True
+        Me.btnClear.UseVisualStyleBackColor = False
         '
         'btnConfirm
         '
-        Me.btnConfirm.Location = New System.Drawing.Point(14, 371)
+        Me.btnConfirm.BackColor = System.Drawing.Color.PaleGreen
+        Me.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfirm.Location = New System.Drawing.Point(80, 372)
         Me.btnConfirm.Name = "btnConfirm"
-        Me.btnConfirm.Size = New System.Drawing.Size(93, 23)
+        Me.btnConfirm.Size = New System.Drawing.Size(75, 23)
         Me.btnConfirm.TabIndex = 18
         Me.btnConfirm.Text = "ADD"
-        Me.btnConfirm.UseVisualStyleBackColor = True
+        Me.btnConfirm.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -599,6 +595,7 @@ Partial Class frmMain
         '
         'tab2
         '
+        Me.tab2.Controls.Add(Me.MenuStrip2)
         Me.tab2.Controls.Add(Me.dgPets)
         Me.tab2.Location = New System.Drawing.Point(4, 22)
         Me.tab2.Name = "tab2"
@@ -608,8 +605,26 @@ Partial Class frmMain
         Me.tab2.Text = "Table View"
         Me.tab2.UseVisualStyleBackColor = True
         '
+        'MenuStrip2
+        '
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnToggleStatus})
+        Me.MenuStrip2.Location = New System.Drawing.Point(3, 3)
+        Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.Size = New System.Drawing.Size(621, 24)
+        Me.MenuStrip2.TabIndex = 10
+        Me.MenuStrip2.Text = "MenuStrip2"
+        '
+        'btnToggleStatus
+        '
+        Me.btnToggleStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnToggleStatus.BackColor = System.Drawing.Color.PaleGreen
+        Me.btnToggleStatus.Name = "btnToggleStatus"
+        Me.btnToggleStatus.Size = New System.Drawing.Size(69, 20)
+        Me.btnToggleStatus.Text = "ACTIVATE"
+        '
         'frmMain
         '
+        Me.AcceptButton = Me.btnConfirm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(984, 461)
@@ -636,6 +651,9 @@ Partial Class frmMain
         Me.tabViews.ResumeLayout(False)
         Me.tab1.ResumeLayout(False)
         Me.tab2.ResumeLayout(False)
+        Me.tab2.PerformLayout()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -689,7 +707,6 @@ Partial Class frmMain
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AuditLogsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnToggleStatus As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents btnConfirm As Button
     Friend WithEvents pnlFlow As FlowLayoutPanel
@@ -698,4 +715,6 @@ Partial Class frmMain
     Friend WithEvents tab2 As TabPage
     Friend WithEvents tooltipMain As ToolTip
     Friend WithEvents dtpBirth As DateTimePicker
+    Friend WithEvents MenuStrip2 As MenuStrip
+    Friend WithEvents btnToggleStatus As ToolStripMenuItem
 End Class
