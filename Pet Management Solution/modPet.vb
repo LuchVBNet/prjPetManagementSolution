@@ -5,9 +5,15 @@ Imports MySql.Data.MySqlClient
 Imports CrystalDecisions.Windows.Forms
 Module modPet
     Public auth As User
+    Public mod_user As User
+    Public mod_pet As Pet
+    Public mod_breed As PetBreed
+    Public mod_type As PetType
+    Public mod_owner As PetOwner
     Public dbKit As MySQLKit
     Sub New()
         dbKit = New MySQLKit("localhost", "dbpets", "root", "")
+        'dbKit = New MySQLKit("btmownbmbobe9hjv3aek-mysql.services.clever-cloud.com", "btmownbmbobe9hjv3aek", "ub8otayzjqumpkxr", "fxsfBTdKh05iKOzwGyBv")
         'dbKit = New MySQLKit("luchmewep.mysql.database.azure.com", "dbpets", "luchmewep@luchmewep", "B32eeee0.")
     End Sub
 
@@ -39,9 +45,8 @@ Module modPet
     End Function
 
     Public Function LogUpdatePassword(ByRef strQuery As String, strForm As String, strColumn As String, strObject As String, intID As Integer, strUsername As String, newValue As String) As Boolean
-        If auth.CheckPassword(strUsername, newValue) Then
+        If Not User.CheckPassword(strUsername, newValue) Then
             strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 3, {auth.ID}, '{strForm}', 'Update {strColumn} of {strObject} - #{intID}.');"
-            'MsgBox($"{prevValue} to {newValue}")
             Return True
         Else
             Return False
@@ -50,10 +55,12 @@ Module modPet
 
     Public Sub LogDeactivate(ByRef strQuery As String, strForm As String, strObject As String, intID As Integer)
         strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 4, {auth.ID}, '{strForm}', 'Deactivated {strObject} - #{intID}.')"
+        'MsgBox(strQuery)
     End Sub
 
     Public Sub LogActivate(ByRef strQuery As String, strForm As String, strObject As String, intID As Integer)
         strQuery += $"INSERT INTO tblauditlog (logDateTime, logType, userID, logModule, logComment) VALUES (now(), 4, {auth.ID}, '{strForm}', 'Activated {strObject} - #{intID}.')"
+        'MsgBox(strQuery)
     End Sub
 
     Public Sub LogPrint(ByRef strQuery As String, strForm As String)

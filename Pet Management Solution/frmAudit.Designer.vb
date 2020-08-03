@@ -28,19 +28,24 @@ Partial Class frmAudit
         '
         'dgAudit
         '
+        Me.dgAudit.AllowUserToAddRows = False
+        Me.dgAudit.AllowUserToDeleteRows = False
+        Me.dgAudit.AllowUserToOrderColumns = True
+        Me.dgAudit.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgAudit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgAudit.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgAudit.Location = New System.Drawing.Point(0, 0)
         Me.dgAudit.Margin = New System.Windows.Forms.Padding(4)
         Me.dgAudit.Name = "dgAudit"
-        Me.dgAudit.Size = New System.Drawing.Size(580, 379)
+        Me.dgAudit.ReadOnly = True
+        Me.dgAudit.Size = New System.Drawing.Size(784, 361)
         Me.dgAudit.TabIndex = 0
         '
         'frmAudit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(580, 379)
+        Me.ClientSize = New System.Drawing.Size(784, 361)
         Me.Controls.Add(Me.dgAudit)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4)

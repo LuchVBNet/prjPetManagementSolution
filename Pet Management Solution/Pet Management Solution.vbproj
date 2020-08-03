@@ -179,6 +179,18 @@
     <Compile Include="frmUsers.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="pnlPet.Designer.vb">
+      <DependentUpon>pnlPet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pnlPet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pnlUser.Designer.vb">
+      <DependentUpon>pnlUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pnlUser.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="User.vb" />
     <Compile Include="modPet.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -216,9 +228,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAboutUs.resx">
       <DependentUpon>frmAboutUs.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAudit.resx">
       <DependentUpon>frmAudit.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBreed.resx">
       <DependentUpon>frmBreed.vb</DependentUpon>
@@ -249,6 +263,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pnlPet.resx">
+      <DependentUpon>pnlPet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pnlUser.resx">
+      <DependentUpon>pnlUser.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +314,12 @@
   <ItemGroup>
     <None Include="Pet Management Solution_TemporaryKey.pfx" />
     <None Include="Resources\PetShop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luffy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

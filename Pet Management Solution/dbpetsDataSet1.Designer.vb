@@ -58,8 +58,8 @@ Partial Public Class dbpetsDataSet
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
-            If (Not (ds.Tables("viewusers")) Is Nothing) Then
-                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewusers")))
+            If (Not (ds.Tables("viewuser")) Is Nothing) Then
+                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewuser")))
             End If
             If (Not (ds.Tables("pets")) Is Nothing) Then
                 MyBase.Tables.Add(New petsDataTable(ds.Tables("pets")))
@@ -85,7 +85,7 @@ Partial Public Class dbpetsDataSet
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
      Global.System.ComponentModel.Browsable(false),  _
      Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
-    Public ReadOnly Property viewusers() As viewusersDataTable
+    Public ReadOnly Property viewuser() As viewusersDataTable
         Get
             Return Me.tableviewusers
         End Get
@@ -168,8 +168,8 @@ Partial Public Class dbpetsDataSet
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
-            If (Not (ds.Tables("viewusers")) Is Nothing) Then
-                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewusers")))
+            If (Not (ds.Tables("viewuser")) Is Nothing) Then
+                MyBase.Tables.Add(New viewusersDataTable(ds.Tables("viewuser")))
             End If
             If (Not (ds.Tables("pets")) Is Nothing) Then
                 MyBase.Tables.Add(New petsDataTable(ds.Tables("pets")))
@@ -206,7 +206,7 @@ Partial Public Class dbpetsDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
-        Me.tableviewusers = CType(MyBase.Tables("viewusers"),viewusersDataTable)
+        Me.tableviewusers = CType(MyBase.Tables("viewuser"),viewusersDataTable)
         If (initTable = true) Then
             If (Not (Me.tableviewusers) Is Nothing) Then
                 Me.tableviewusers.InitVars
@@ -236,7 +236,7 @@ Partial Public Class dbpetsDataSet
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-    Private Function ShouldSerializeviewusers() As Boolean
+    Private Function ShouldSerializeviewuser() As Boolean
         Return false
     End Function
     
@@ -336,7 +336,7 @@ Partial Public Class dbpetsDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
             MyBase.New
-            Me.TableName = "viewusers"
+            Me.TableName = "viewuser"
             Me.BeginInit
             Me.InitClass
             Me.EndInit
@@ -534,6 +534,12 @@ Partial Public Class dbpetsDataSet
             Me.columnType.AllowDBNull = false
             Me.columnType.MaxLength = 7
             Me.columnStatus.MaxLength = 8
+            Me.ExtendedProperties.Add("Generator_RowClassName", "viewusersRow")
+            Me.ExtendedProperties.Add("Generator_RowEvArgName", "viewusersRowChangeEvent")
+            Me.ExtendedProperties.Add("Generator_RowEvHandlerName", "viewusersRowChangeEventHandler")
+            Me.ExtendedProperties.Add("Generator_TableClassName", "viewusersDataTable")
+            Me.ExtendedProperties.Add("Generator_TableVarName", "tableviewusers")
+            Me.ExtendedProperties.Add("Generator_UserTableName", "viewuser")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1114,7 +1120,7 @@ Partial Public Class dbpetsDataSet
                 Try 
                     Return CType(Me(Me.tableviewusers.StatusColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Status' in table 'viewusers' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Status' in table 'viewuser' is DBNull.", e)
                 End Try
             End Get
             Set
@@ -1595,7 +1601,7 @@ Namespace dbpetsDataSetTableAdapters
             Me._adapter = New Global.MySql.Data.MySqlClient.MySqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
             tableMapping.SourceTable = "Table"
-            tableMapping.DataSetTable = "viewusers"
+            tableMapping.DataSetTable = "viewuser"
             tableMapping.ColumnMappings.Add("ID", "ID")
             tableMapping.ColumnMappings.Add("First Name", "First Name")
             tableMapping.ColumnMappings.Add("Last Name", "Last Name")
@@ -1620,7 +1626,7 @@ Namespace dbpetsDataSetTableAdapters
             Me._commandCollection(0) = New Global.MySql.Data.MySqlClient.MySqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT `ID`, `First Name`, `Last Name`, `Contact`, `Username`, `Type`, `Status` F"& _ 
-                "ROM `dbpets`.`viewusers`"
+                "ROM `dbpets`.`viewuser`"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         

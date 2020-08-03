@@ -22,13 +22,17 @@ Public Class frmLogin
 
             End Try
         ElseIf auth.Username <> String.Empty AndAlso Not auth.IsActive Then
-            MessageBox.Show("Access denied. User is deactivated already. Contact system administrator.", "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Access denied. User is deactivated already. Contact system administrator.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
-            MessageBox.Show("Access denied. Invalid username or password.", "Pet DBMS", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Access denied. Invalid username or password.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

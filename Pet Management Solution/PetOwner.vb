@@ -4,12 +4,16 @@
     Private ownerAddress As String
     Private ownerContactNumber As String
     Private ownerStatus As String
+    'Queries
     Private strQuery As String
     Private strAuditLog As String
+    'Tables & Views
+    Private Const strTable As String = "tblowner"
+    Private Const strView As String = "viewowner"
 
     'Create New Owner
     Public Sub New(intID As Integer, strName As String, strAddress As String, strPhone As String)
-        strQuery = $"INSERT INTO tblowner VALUES ({intID},'{strName}', '{strAddress}', '{strPhone}', 'Active')"
+        strQuery = $"INSERT INTO {TableName} VALUES ({intID},'{strName}', '{strAddress}', '{strPhone}', 'Active')"
         If dbKit.RunQuery(strQuery) Then
             MessageBox.Show("New pet owner registered.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
             LogCreate(strAuditLog, "Pet Owner form", "owner", intID)
@@ -22,7 +26,7 @@
 
     'Search Owner by ID
     Public Sub New(intID As Integer)
-        Dim dt As DataTable = dbKit.GetQuery($"SELECT * FROM tblowner WHERE ownerID = {intID}")
+        Dim dt As DataTable = dbKit.GetQuery($"SELECT * FROM {TableName} WHERE ownerID = {intID}")
         If dt.Rows.Count > 0 Then
             With dt.Rows(0)
                 ownerID = intID
@@ -39,7 +43,7 @@
 
     Public Sub Update()
         If strAuditLog <> String.Empty Then
-            strQuery = $"UPDATE tblowner SET ownerName = '{ownerName}', ownerAddress = '{ownerAddress}', ownerContactNumber = '{ownerContactNumber}' WHERE ownerID = {ownerID}"
+            strQuery = $"UPDATE {strTable} SET ownerName = '{ownerName}', ownerAddress = '{ownerAddress}', ownerContactNumber = '{ownerContactNumber}' WHERE ownerID = {ownerID}"
             'MsgBox(strQuery)
             If dbKit.RunQuery(strQuery) Then
                 MessageBox.Show("Pet owner updated.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -54,8 +58,15 @@
     Public Sub UpdateStatus(strStatus As String)
         Me.Status = strStatus
         If strAuditLog <> String.Empty Then
-            strQuery = $"UPDATE tblpet SET ownerStatus='{ownerStatus}' WHERE petID = {ownerID}"
-            'MsgBox(strQuery)
+            'Check first for dependency
+            If strStatus = "Inactive" Then
+                Dim intCount As Integer = CType(dbKit.GetQuery($"SELECT `Pet Count` FROM {strView} WHERE ID = {ownerID}").Rows(0).Item("Pet Count"), Integer)
+                If intCount > 0 Then
+                    MessageBox.Show("Deactivation failed. Deactivate first all pets under this pet owner.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return
+                End If
+            End If
+            strQuery = $"UPDATE {strTable} SET ownerStatus='{ownerStatus}' WHERE ownerID = {ownerID}"
             If dbKit.RunQuery(strQuery) Then
                 MessageBox.Show($"Owner status set to {ownerStatus.ToUpper}.", My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
                 dbKit.RunQuery(strAuditLog)
@@ -66,14 +77,39 @@
         End If
     End Sub
 
+    Public Sub ToggleStatus()
+        UpdateStatus(If(ownerStatus = "Active", "Inactive", "Active"))
+    End Sub
+
     Private Sub ClearQueries()
         strQuery = String.Empty
         strAuditLog = String.Empty
     End Sub
 
+    Public Shared Sub PopulateComboBox(ByRef cboBox As ComboBox)
+        PopulateComboBox(cboBox, "Active")
+    End Sub
+    Public Shared Sub PopulateComboBox(ByRef cboBox As ComboBox, strStatus As String)
+        cboBox.Text = String.Empty
+        dbKit.PopulateComboBox(cboBox, strView, strStatus)
+    End Sub
+
+    'Properties
     Public ReadOnly Property ID As Integer
         Get
             Return ownerID
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property TableName As String
+        Get
+            Return strTable
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property ViewName As String
+        Get
+            Return strView
         End Get
     End Property
 

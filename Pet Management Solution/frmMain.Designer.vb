@@ -22,21 +22,22 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.rdoInactive = New System.Windows.Forms.RadioButton()
         Me.rdoActive = New System.Windows.Forms.RadioButton()
         Me.rdoAll = New System.Windows.Forms.RadioButton()
+        Me.btnPrint = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnPrint = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnNew = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.dgPets = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.dtpBirth = New System.Windows.Forms.DateTimePicker()
+        Me.btnToggleStatus = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnConfirm = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
-        Me.txtBirthdate = New System.Windows.Forms.MaskedTextBox()
         Me.txtNotes = New System.Windows.Forms.TextBox()
         Me.btnAddOwner = New System.Windows.Forms.Button()
         Me.btnAddBreed = New System.Windows.Forms.Button()
@@ -74,58 +75,83 @@ Partial Class frmMain
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.pnlFlow = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tabViews = New System.Windows.Forms.TabControl()
+        Me.tab1 = New System.Windows.Forms.TabPage()
+        Me.tab2 = New System.Windows.Forms.TabPage()
+        Me.tooltipMain = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox2.SuspendLayout()
         CType(Me.dgPets, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        Me.tabViews.SuspendLayout()
+        Me.tab1.SuspendLayout()
+        Me.tab2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
         '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.rdoInactive)
         Me.GroupBox2.Controls.Add(Me.rdoActive)
         Me.GroupBox2.Controls.Add(Me.rdoAll)
+        Me.GroupBox2.Controls.Add(Me.btnPrint)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtSearch)
-        Me.GroupBox2.Location = New System.Drawing.Point(241, 27)
+        Me.GroupBox2.Location = New System.Drawing.Point(336, 27)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(645, 44)
+        Me.GroupBox2.Size = New System.Drawing.Size(636, 44)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         '
         'rdoInactive
         '
         Me.rdoInactive.AutoSize = True
-        Me.rdoInactive.Location = New System.Drawing.Point(304, 16)
+        Me.rdoInactive.Location = New System.Drawing.Point(283, 14)
         Me.rdoInactive.Name = "rdoInactive"
         Me.rdoInactive.Size = New System.Drawing.Size(63, 17)
         Me.rdoInactive.TabIndex = 4
-        Me.rdoInactive.TabStop = True
         Me.rdoInactive.Text = "Inactive"
+        Me.tooltipMain.SetToolTip(Me.rdoInactive, "Inactive Pets")
         Me.rdoInactive.UseVisualStyleBackColor = True
         '
         'rdoActive
         '
         Me.rdoActive.AutoSize = True
-        Me.rdoActive.Location = New System.Drawing.Point(243, 16)
+        Me.rdoActive.Location = New System.Drawing.Point(222, 14)
         Me.rdoActive.Name = "rdoActive"
         Me.rdoActive.Size = New System.Drawing.Size(55, 17)
         Me.rdoActive.TabIndex = 3
-        Me.rdoActive.TabStop = True
         Me.rdoActive.Text = "Active"
+        Me.tooltipMain.SetToolTip(Me.rdoActive, "Active Pets")
         Me.rdoActive.UseVisualStyleBackColor = True
         '
         'rdoAll
         '
         Me.rdoAll.AutoSize = True
-        Me.rdoAll.Location = New System.Drawing.Point(192, 16)
+        Me.rdoAll.Checked = True
+        Me.rdoAll.Location = New System.Drawing.Point(180, 14)
         Me.rdoAll.Name = "rdoAll"
         Me.rdoAll.Size = New System.Drawing.Size(36, 17)
         Me.rdoAll.TabIndex = 2
         Me.rdoAll.TabStop = True
         Me.rdoAll.Text = "All"
+        Me.tooltipMain.SetToolTip(Me.rdoAll, "All Pets")
         Me.rdoAll.UseVisualStyleBackColor = True
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.btnPrint.Location = New System.Drawing.Point(555, 11)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(75, 23)
+        Me.btnPrint.TabIndex = 5
+        Me.btnPrint.Text = "Print"
+        Me.tooltipMain.SetToolTip(Me.btnPrint, "Print Active and Inactive Pets")
+        Me.btnPrint.UseVisualStyleBackColor = True
         '
         'Label10
         '
@@ -138,69 +164,36 @@ Partial Class frmMain
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(58, 13)
+        Me.txtSearch.Location = New System.Drawing.Point(58, 12)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(100, 20)
         Me.txtSearch.TabIndex = 1
-        '
-        'btnPrint
-        '
-        Me.btnPrint.Location = New System.Drawing.Point(811, 387)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(75, 23)
-        Me.btnPrint.TabIndex = 8
-        Me.btnPrint.Text = "Print"
-        Me.btnPrint.UseVisualStyleBackColor = True
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(255, 387)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 6
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(174, 387)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 5
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnNew
-        '
-        Me.btnNew.Location = New System.Drawing.Point(12, 387)
-        Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnNew.TabIndex = 3
-        Me.btnNew.Text = "New"
-        Me.btnNew.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(93, 387)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 4
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.tooltipMain.SetToolTip(Me.txtSearch, "Press Enter to Search")
         '
         'dgPets
         '
+        Me.dgPets.AllowUserToAddRows = False
+        Me.dgPets.AllowUserToDeleteRows = False
+        Me.dgPets.AllowUserToOrderColumns = True
         Me.dgPets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgPets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgPets.Location = New System.Drawing.Point(241, 77)
+        Me.dgPets.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgPets.Location = New System.Drawing.Point(3, 3)
         Me.dgPets.Name = "dgPets"
-        Me.dgPets.Size = New System.Drawing.Size(645, 294)
+        Me.dgPets.ReadOnly = True
+        Me.dgPets.Size = New System.Drawing.Size(621, 318)
         Me.dgPets.TabIndex = 2
         '
         'GroupBox1
         '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.dtpBirth)
+        Me.GroupBox1.Controls.Add(Me.btnToggleStatus)
+        Me.GroupBox1.Controls.Add(Me.btnClear)
+        Me.GroupBox1.Controls.Add(Me.btnConfirm)
+        Me.GroupBox1.Controls.Add(Me.PictureBox1)
         Me.GroupBox1.Controls.Add(Me.cboStatus)
-        Me.GroupBox1.Controls.Add(Me.txtBirthdate)
         Me.GroupBox1.Controls.Add(Me.txtNotes)
         Me.GroupBox1.Controls.Add(Me.btnAddOwner)
         Me.GroupBox1.Controls.Add(Me.btnAddBreed)
@@ -220,12 +213,59 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.txtID)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 25)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 27)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(214, 346)
+        Me.GroupBox1.Size = New System.Drawing.Size(318, 401)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pet Information Form"
+        '
+        'dtpBirth
+        '
+        Me.dtpBirth.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpBirth.Location = New System.Drawing.Point(71, 78)
+        Me.dtpBirth.Name = "dtpBirth"
+        Me.dtpBirth.Size = New System.Drawing.Size(135, 20)
+        Me.dtpBirth.TabIndex = 5
+        Me.dtpBirth.Value = New Date(2020, 8, 3, 0, 0, 0, 0)
+        '
+        'btnToggleStatus
+        '
+        Me.btnToggleStatus.Location = New System.Drawing.Point(212, 371)
+        Me.btnToggleStatus.Name = "btnToggleStatus"
+        Me.btnToggleStatus.Size = New System.Drawing.Size(93, 23)
+        Me.btnToggleStatus.TabIndex = 20
+        Me.btnToggleStatus.Text = "TOGGLE"
+        Me.btnToggleStatus.UseVisualStyleBackColor = True
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(113, 371)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(93, 23)
+        Me.btnClear.TabIndex = 19
+        Me.btnClear.Text = "CLEAR"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnConfirm
+        '
+        Me.btnConfirm.Location = New System.Drawing.Point(14, 371)
+        Me.btnConfirm.Name = "btnConfirm"
+        Me.btnConfirm.Size = New System.Drawing.Size(93, 23)
+        Me.btnConfirm.TabIndex = 18
+        Me.btnConfirm.Text = "ADD"
+        Me.btnConfirm.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox1.Image = Global.Pet_Management_Solution.My.Resources.Resources.doge
+        Me.PictureBox1.Location = New System.Drawing.Point(213, 26)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(99, 99)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 21
+        Me.PictureBox1.TabStop = False
         '
         'cboStatus
         '
@@ -233,50 +273,41 @@ Partial Class frmMain
         Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
         Me.cboStatus.Location = New System.Drawing.Point(69, 320)
         Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(100, 21)
+        Me.cboStatus.Size = New System.Drawing.Size(129, 21)
         Me.cboStatus.TabIndex = 17
-        '
-        'txtBirthdate
-        '
-        Me.txtBirthdate.Location = New System.Drawing.Point(69, 78)
-        Me.txtBirthdate.Mask = "00/00/0000"
-        Me.txtBirthdate.Name = "txtBirthdate"
-        Me.txtBirthdate.Size = New System.Drawing.Size(100, 20)
-        Me.txtBirthdate.TabIndex = 5
-        Me.txtBirthdate.ValidatingType = GetType(Date)
         '
         'txtNotes
         '
         Me.txtNotes.Location = New System.Drawing.Point(69, 211)
         Me.txtNotes.Multiline = True
         Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.Size = New System.Drawing.Size(100, 103)
+        Me.txtNotes.Size = New System.Drawing.Size(243, 103)
         Me.txtNotes.TabIndex = 15
         '
         'btnAddOwner
         '
-        Me.btnAddOwner.Location = New System.Drawing.Point(175, 182)
+        Me.btnAddOwner.Location = New System.Drawing.Point(213, 184)
         Me.btnAddOwner.Name = "btnAddOwner"
         Me.btnAddOwner.Size = New System.Drawing.Size(28, 23)
-        Me.btnAddOwner.TabIndex = 20
+        Me.btnAddOwner.TabIndex = 23
         Me.btnAddOwner.Text = "+"
         Me.btnAddOwner.UseVisualStyleBackColor = True
         '
         'btnAddBreed
         '
-        Me.btnAddBreed.Location = New System.Drawing.Point(175, 157)
+        Me.btnAddBreed.Location = New System.Drawing.Point(213, 155)
         Me.btnAddBreed.Name = "btnAddBreed"
         Me.btnAddBreed.Size = New System.Drawing.Size(28, 23)
-        Me.btnAddBreed.TabIndex = 19
+        Me.btnAddBreed.TabIndex = 22
         Me.btnAddBreed.Text = "+"
         Me.btnAddBreed.UseVisualStyleBackColor = True
         '
         'btnAddType
         '
-        Me.btnAddType.Location = New System.Drawing.Point(175, 128)
+        Me.btnAddType.Location = New System.Drawing.Point(213, 128)
         Me.btnAddType.Name = "btnAddType"
         Me.btnAddType.Size = New System.Drawing.Size(28, 23)
-        Me.btnAddType.TabIndex = 18
+        Me.btnAddType.TabIndex = 21
         Me.btnAddType.Text = "+"
         Me.btnAddType.UseVisualStyleBackColor = True
         '
@@ -294,7 +325,7 @@ Partial Class frmMain
         Me.cboOwner.FormattingEnabled = True
         Me.cboOwner.Location = New System.Drawing.Point(69, 184)
         Me.cboOwner.Name = "cboOwner"
-        Me.cboOwner.Size = New System.Drawing.Size(100, 21)
+        Me.cboOwner.Size = New System.Drawing.Size(137, 21)
         Me.cboOwner.TabIndex = 13
         '
         'Label8
@@ -311,7 +342,7 @@ Partial Class frmMain
         Me.cboBreed.FormattingEnabled = True
         Me.cboBreed.Location = New System.Drawing.Point(69, 157)
         Me.cboBreed.Name = "cboBreed"
-        Me.cboBreed.Size = New System.Drawing.Size(100, 21)
+        Me.cboBreed.Size = New System.Drawing.Size(137, 21)
         Me.cboBreed.TabIndex = 11
         '
         'Label7
@@ -328,7 +359,7 @@ Partial Class frmMain
         Me.cboType.FormattingEnabled = True
         Me.cboType.Location = New System.Drawing.Point(69, 130)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(100, 21)
+        Me.cboType.Size = New System.Drawing.Size(137, 21)
         Me.cboType.TabIndex = 9
         '
         'Label6
@@ -346,7 +377,7 @@ Partial Class frmMain
         Me.cboGender.Items.AddRange(New Object() {"Male", "Female"})
         Me.cboGender.Location = New System.Drawing.Point(69, 104)
         Me.cboGender.Name = "cboGender"
-        Me.cboGender.Size = New System.Drawing.Size(100, 21)
+        Me.cboGender.Size = New System.Drawing.Size(137, 21)
         Me.cboGender.TabIndex = 7
         '
         'Label5
@@ -371,7 +402,7 @@ Partial Class frmMain
         '
         Me.txtName.Location = New System.Drawing.Point(69, 52)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(100, 20)
+        Me.txtName.Size = New System.Drawing.Size(138, 20)
         Me.txtName.TabIndex = 3
         '
         'Label3
@@ -397,7 +428,7 @@ Partial Class frmMain
         Me.txtID.Location = New System.Drawing.Point(69, 26)
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
-        Me.txtID.Size = New System.Drawing.Size(100, 20)
+        Me.txtID.Size = New System.Drawing.Size(137, 20)
         Me.txtID.TabIndex = 1
         '
         'Label1
@@ -412,24 +443,24 @@ Partial Class frmMain
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblUsername, Me.statusDeveloped})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 421)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 439)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.StatusStrip1.Size = New System.Drawing.Size(898, 22)
-        Me.StatusStrip1.TabIndex = 10
+        Me.StatusStrip1.Size = New System.Drawing.Size(984, 22)
+        Me.StatusStrip1.TabIndex = 4
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'lblUsername
         '
         Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(441, 17)
+        Me.lblUsername.Size = New System.Drawing.Size(484, 17)
         Me.lblUsername.Spring = True
         Me.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'statusDeveloped
         '
         Me.statusDeveloped.Name = "statusDeveloped"
-        Me.statusDeveloped.Size = New System.Drawing.Size(441, 17)
+        Me.statusDeveloped.Size = New System.Drawing.Size(484, 17)
         Me.statusDeveloped.Spring = True
         Me.statusDeveloped.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -439,8 +470,8 @@ Partial Class frmMain
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MenuStrip1.Size = New System.Drawing.Size(898, 24)
-        Me.MenuStrip1.TabIndex = 11
+        Me.MenuStrip1.Size = New System.Drawing.Size(984, 24)
+        Me.MenuStrip1.TabIndex = 2
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'lblFullName
@@ -531,35 +562,80 @@ Partial Class frmMain
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
         Me.AboutToolStripMenuItem.Text = "&About Pet Management Solution"
         '
+        'pnlFlow
+        '
+        Me.pnlFlow.AutoScroll = True
+        Me.pnlFlow.BackColor = System.Drawing.Color.Transparent
+        Me.pnlFlow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlFlow.Location = New System.Drawing.Point(3, 3)
+        Me.pnlFlow.Name = "pnlFlow"
+        Me.pnlFlow.Size = New System.Drawing.Size(621, 318)
+        Me.pnlFlow.TabIndex = 0
+        '
+        'tabViews
+        '
+        Me.tabViews.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tabViews.Controls.Add(Me.tab1)
+        Me.tabViews.Controls.Add(Me.tab2)
+        Me.tabViews.Location = New System.Drawing.Point(337, 78)
+        Me.tabViews.Name = "tabViews"
+        Me.tabViews.SelectedIndex = 0
+        Me.tabViews.Size = New System.Drawing.Size(635, 350)
+        Me.tabViews.TabIndex = 3
+        Me.tooltipMain.SetToolTip(Me.tabViews, "Switch Views")
+        '
+        'tab1
+        '
+        Me.tab1.BackColor = System.Drawing.Color.Transparent
+        Me.tab1.Controls.Add(Me.pnlFlow)
+        Me.tab1.Location = New System.Drawing.Point(4, 22)
+        Me.tab1.Name = "tab1"
+        Me.tab1.Padding = New System.Windows.Forms.Padding(3)
+        Me.tab1.Size = New System.Drawing.Size(627, 324)
+        Me.tab1.TabIndex = 1
+        Me.tab1.Text = "Grid View"
+        '
+        'tab2
+        '
+        Me.tab2.Controls.Add(Me.dgPets)
+        Me.tab2.Location = New System.Drawing.Point(4, 22)
+        Me.tab2.Name = "tab2"
+        Me.tab2.Padding = New System.Windows.Forms.Padding(3)
+        Me.tab2.Size = New System.Drawing.Size(627, 324)
+        Me.tab2.TabIndex = 0
+        Me.tab2.Text = "Table View"
+        Me.tab2.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(898, 443)
+        Me.ClientSize = New System.Drawing.Size(984, 461)
+        Me.Controls.Add(Me.tabViews)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.btnPrint)
-        Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnNew)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.dgPets)
         Me.Controls.Add(Me.GroupBox1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1000, 500)
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.dgPets, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.tabViews.ResumeLayout(False)
+        Me.tab1.ResumeLayout(False)
+        Me.tab2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -572,13 +648,8 @@ Partial Class frmMain
     Friend WithEvents Label10 As Label
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnPrint As Button
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnNew As Button
-    Friend WithEvents btnSave As Button
     Friend WithEvents dgPets As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents txtBirthdate As MaskedTextBox
     Friend WithEvents txtNotes As TextBox
     Friend WithEvents btnAddOwner As Button
     Friend WithEvents btnAddBreed As Button
@@ -617,4 +688,14 @@ Partial Class frmMain
     Friend WithEvents toolStripSeparator5 As ToolStripSeparator
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AuditLogsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnToggleStatus As Button
+    Friend WithEvents btnClear As Button
+    Friend WithEvents btnConfirm As Button
+    Friend WithEvents pnlFlow As FlowLayoutPanel
+    Friend WithEvents tabViews As TabControl
+    Friend WithEvents tab1 As TabPage
+    Friend WithEvents tab2 As TabPage
+    Friend WithEvents tooltipMain As ToolTip
+    Friend WithEvents dtpBirth As DateTimePicker
 End Class
